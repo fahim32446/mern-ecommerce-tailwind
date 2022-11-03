@@ -64,7 +64,7 @@ const ProductList = () => {
 
 
                     {/* Filter Item */}
-                    <div className='w-[20%] '>
+                    <div className=' w-[35%] lg:w-[20%] p-1'>
                         <div className="flex flex-col mr-2">
                             {/* search */}
                             <div className="flex items-center">
@@ -133,9 +133,9 @@ const ProductList = () => {
 
 
                     {/* product */}
-                    <div className='w-[80%]'>
+                    <div className='w-[65%] lg:w-[80%]'>
                         {isLoading ? <ProductListLoading /> : (
-                            <div className="grid grid-cols-3 ml-5 mr-5 gap-5">
+                            <div className="grid grid-cols-1 lg:grid-cols-3 ml-5 mr-5 gap-5">
 
                                 {products?.map((item, index) => (
                                     <Product2 item={item} index={index} />

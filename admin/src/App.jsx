@@ -25,6 +25,7 @@ const App = () => {
 
         <div className='grid grid-cols-1 col-span-10 ml-8 p-2'>
           <Routes>
+          <Route path="/" element={<Login />} />
             <Route path="/addProduct" element={<AddProduct />} />
             <Route path="/addProduct/:id" element={<AddProduct />} />
             <Route path="/dashboard" element={<Dashboard />} />

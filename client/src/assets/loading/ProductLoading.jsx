@@ -4,7 +4,7 @@ const productLoading = () => {
   return (
     <div>
 
-      <div className='container mx-auto my-20'>
+      <div className='container mx-auto my-5'>
 
         <div role="status" className='animate-pulse flex justify-between p-2'>
           <div className="h-2.5 bg-gray-200 rounded-full w-16 mb-4"></div>

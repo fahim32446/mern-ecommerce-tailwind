@@ -5,9 +5,11 @@ const TOKEN = localStorage.getItem('user');
 
 export const getProducts = createAsyncThunk('products/getProducts',
     async () => {
+        
         const res = await Axios.get(`${baseUrl}/api/v1/product`, {
             headers: {
                 token: `Bearer ${TOKEN.replaceAll('"', '')}`
+                 
             }
         });
         return res.data;

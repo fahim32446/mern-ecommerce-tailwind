@@ -65,20 +65,20 @@ const Cart = () => {
     // isLoading ? 'Loading' : (
 
 
-    <div className='container mx-auto flex m-10'>
-      <div className='w-[75%] mt-9'>
+    <div className='container mx-auto lg:flex m-10'>
+      <div className='lg:w-[75%] mt-9'>
 
         {cart.map((item, index) => (
           <div key={index} className='mt-1 grid grid-cols-2 gap-2'>
             <div className="grid grid-cols-6 gap-1 col-span-2 bg-slate-100 m-2 rounded-lg border drop-shadow-lg">
 
-              <div className='w-[120px] h-[120px] mr-1'>
-                <img className="w-full h-full object-cover rounded-md" src={item?.image} />
+              <div className='w-[120px] h-[120px] mr-3 self-center p-1'>
+                <img className="object-cover rounded-md" src={item?.image} />
               </div>
 
               <div className='w-full flex items-center col-span-2' >
-                <div className='ml-0'>
-                  <h2 className='font-bold text-purple-500'>{item?.title}</h2>
+                <div className='ml-16 lg:ml-0'>
+                  <h2 className='font-bold text-purple-500 '>{item?.title}</h2>
                   <div className='mt-3'>
                     <h2 className='font-semibold'>{item?.color}</h2>
                     <h2>{item?.size}</h2>
@@ -113,7 +113,7 @@ const Cart = () => {
       </div>
 
 
-      <div className='w-[25%] mt-10'>
+      <div className='lg:w-[25%] mt-10'>
 
         <div className=' grid grid-cols-1'>
           <div className='grid grid-rows-2 '>

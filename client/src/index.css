@@ -152,3 +152,20 @@
   background: rgba(255, 255, 255, 0.6);
   filter: blur(750px);
 }
+
+@layer components{
+  .hover{
+    @apply duration-500 scale-[1.05] border-purple-300
+
+  }
+}
+
+
+/* .slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+} */

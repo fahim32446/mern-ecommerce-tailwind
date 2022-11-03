@@ -26,7 +26,7 @@ const NavMenu = () => {
   }
 
   return (
-    <div className='bg-[#d13669]'>
+    <div className='bg-[#9b1eb6]'>
       <div className='container mx-auto'>
         <div className="p-2">
           <div className='flex flex-row justify-between  '>
@@ -34,7 +34,7 @@ const NavMenu = () => {
             {/* Logo........ */}
             <div className='flex flex-row items-center'>
               <div className="bg-gradient-to-r from-purple-400 to-red-400 w-10 h-10 rounded-lg"></div>
-              <h1 className="text-2xl text-gray-100 ml-2 ">Shop</h1>
+              <h1 onClick={() => (navigate(`../`))} className="text-2xl text-gray-100 ml-2 cursor-pointer ">MyShop</h1>
             </div>
 
 
@@ -43,19 +43,19 @@ const NavMenu = () => {
               <ul className='list-none sm:flex hidden flex-1'>
 
                 <li className='p-3'>
-                  <a onClick={() => (navigate(`../`, { replace: true }))} className='cursor-pointer text-gray-100  hover:text-purple-100'>Home</a>
+                  <a onClick={() => (navigate(`../`))} className='cursor-pointer text-gray-100  hover:text-purple-100'>Home</a>
                 </li>
 
                 <li className='p-3'>
-                  <a onClick={() => (navigate(`../product`, { replace: true }))} className='cursor-pointer text-gray-100  hover:text-purple-100'>Product</a>
+                  <a onClick={() => (navigate(`../product-list`))} className='cursor-pointer text-gray-100  hover:text-purple-100'>Product</a>
                 </li>
 
-                <li className='p-3'>
-                  <a onClick={() => (navigate(`../clients`, { replace: true }))} className='cursor-pointer text-gray-100  hover:text-purple-100'>Clients</a>
-                </li>
+                {/* <li className='p-3'>
+                  <a onClick={() => (navigate(`../clients`))} className='cursor-pointer text-gray-100  hover:text-purple-100'>Clients</a>
+                </li> */}
 
                 <li className='p-3'>
-                  <a onClick={() => (navigate(`../orders`, { replace: true }))} className='cursor-pointer text-gray-100  hover:text-purple-100'>My Orders</a>
+                  <a onClick={() => (navigate(`../orders`))} className='cursor-pointer text-gray-100  hover:text-purple-100'>My Orders</a>
                 </li>
 
                 {accessToken ? (
@@ -64,11 +64,9 @@ const NavMenu = () => {
                   </li>
                 ) : (
                   <li className='p-3'>
-                    <a onClick={() => (navigate(`../login`, { replace: true }))} className='cursor-pointer text-gray-100  hover:text-purple-100'>Login</a>
+                    <a onClick={() => (navigate(`../login`))} className='cursor-pointer text-gray-100  hover:text-purple-100'>Login</a>
                   </li>
                 )}
-
-
 
                 <Link className='text-white bg-purple-600 p-3 rounded-full hover:bg-purple-700' to={'/cart'}>Cart ({TotalCartItems})</Link>
               </ul>
@@ -82,15 +80,15 @@ const NavMenu = () => {
                   onClick={() => setToggle((prev) => !prev)}
                 />
 
-                <div className={`${toggle ? 'flex' : 'hidden'} absolute top-20 right-0 bg-black-gradient p-6 mx-4 my-2 min-w-[140px] rounded-xl sidebar`} >
+                <div className={`${toggle ? 'flex' : 'hidden'} absolute top-20 right-0 bg-black-gradient p-6 mx-4 my-2 min-w-[140px] rounded-xl sidebar z-10`} >
 
                   <ul className='list-none flex flex-col flex-1'>
                     {navLinks.map((nav, index) => (
                       <li key={index} className='p-3'>
-                        <a className='text-white  hover:text-purple-600' href="#">{nav.title}</a>
+                        <a onClick={() => (navigate(`${nav.id}`))} className='text-white  hover:text-purple-600' >{nav.title}</a>
                       </li>
                     ))}
-                    <a className='text-white bg-purple-600 p-3 rounded-full hover:bg-purple-700' href="#">Cart ({TotalCartItems})</a>
+                    <a onClick={() => (navigate(`cart`))} className='text-white bg-purple-600 p-3 rounded-full hover:bg-purple-700' >Cart ({TotalCartItems})</a>
 
                   </ul>
                 </div>

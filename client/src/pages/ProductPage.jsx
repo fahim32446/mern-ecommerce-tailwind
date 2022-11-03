@@ -106,8 +106,8 @@ const ProductPage = () => {
                         </div>
 
                         <hr />
-                        <h1 className='text-2xl mt-2 font-semibold'>Product Description</h1>
-                        <p className="leading-relaxed">{SingleProduct.description}</p>
+                        <h1 className='text-gray-400 text-2xl mt-2 font-semibold'>Product Description</h1>
+                        <p className="mt-2 leading-relaxed whitespace-pre-wrap">{SingleProduct.description}</p>
                     </div>
 
 

@@ -31,7 +31,7 @@ const Product = () => {
   }
 
   const addToCart = (item) => {
-    
+
     const { _id, title, image, price } = item;
     dispatch(addCart({ ...product, _id, title, image, price, quantity: 1 }));
   }
@@ -43,13 +43,13 @@ const Product = () => {
 
   return (
 
-    isLoading ? <ProductLoading/> : (
+    isLoading ? <ProductLoading /> : (
 
-      <div className='container mx-auto my-20'>
-       
+      <div className='container mx-auto my-5'>
+
         <div className='flex justify-between p-2'>
           <h2 className='text-xl font-semibold'>Product's Collection</h2>
-          <a href="#">View All</a>
+          <a className='cursor-pointer text-purple-500 font-semibold' onClick={() => navigate('../product-list')}>View All</a>
         </div>
 
         <div className='grid grid-flow-row grid-cols-2 gap-3 md:grid-cols-4 p-2'>
@@ -58,7 +58,7 @@ const Product = () => {
             <div key={index} className="shadow-lg rounded-lg">
 
               <a className="" href="#">
-                <img className="rounded-t-lg" style={{ width: '400px', height: '300px', objectFit: 'cover' }} src={item.image} alt="" />
+                <img className="rounded-t-lg p-10" style={{ width: '400px', height: '300px', objectFit: 'cover' }} src={item.image} alt="" />
               </a>
 
               <div className='p-5'>

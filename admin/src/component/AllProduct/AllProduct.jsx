@@ -11,11 +11,9 @@ const AllProduct = () => {
   const { isLoading, products, error } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  console.log(products);
-
+ 
   useEffect(() => {
-    dispatch(getProducts());
+      dispatch(getProducts());
   }, []);
 
   const deleteItem = (_id) => {

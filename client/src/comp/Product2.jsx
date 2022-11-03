@@ -20,7 +20,7 @@ const Product2 = ({ item, index }) => {
         <div>
             <div key={index} className="shadow-lg rounded-lg">
                 <a className="" href="#">
-                    <img className="rounded-t-lg" style={{ width: '400px', height: '300px', objectFit: 'cover' }} src={item.image} alt="" />
+                    <img className="rounded-t-lg p-10" style={{ width: '400px', height: '300px', objectFit: 'cover' }} src={item.image} alt="" />
                 </a>
 
                 <div className='p-5'>

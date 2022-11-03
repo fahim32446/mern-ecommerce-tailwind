@@ -15,7 +15,8 @@ import { useSelector } from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css';
 import Order from './pages/Order';
 import ProductList from './pages/ProductList';
-
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 const App = () => {
 
   const { user, email, accessToken } = useSelector((state) => state.userReducer.user)

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import Loading from './Loading'
+import { BaseUrl } from '../assets/Const';
 
 const Order = () => {
 
@@ -11,10 +12,9 @@ const Order = () => {
   const { _id, user, email } = useSelector((state) => state.userReducer.user)
 
   useEffect(() => {
-
     const getOrder = async () => {
       setLoading(true);
-      const { data } = await axios.get(`http://localhost:5000/api/v1/order/find/${_id}`);
+      const { data } = await axios.get(`${BaseUrl}/api/v1/order/find/${_id}`);
       setProduct(data);
       setLoading(false);
     }
@@ -22,10 +22,10 @@ const Order = () => {
 
   }, [])
 
-  console.log(product);
 
   return (
     <div className='container mx-auto mt-5'>
+      {_id? '': <p className='text-xl text-center p-5 text-red-600'>Please login to see your orders</p>}
       {loading ? <Loading /> : (
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 ">

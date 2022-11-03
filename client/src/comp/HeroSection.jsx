@@ -1,24 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+// import Carousel from 'react-elastic-carousel'
+import CarouselItem from './CarouselItem'
+import { Carousel } from 'flowbite-react'
+import { useNavigate } from 'react-router-dom'
+
 
 const HeroSection = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('../product-list')
+    }
     return (
-        <div className='container mx-auto sm:flex sm:flex-row mt-20'>
 
-            <div className='sm:w-2/5 flex flex-col justify-center items-center sm:items-start'>
-                <h2 className="text-5xl mb-4 text-gray-600">Hello Form Shop</h2>
-                <p className='text-gray-600 uppercase tracking-wide text-center sm:text-left'>Lorem ipsum dolor sit, amet consectetur </p>
-                <p className='text-gray-600 uppercase tracking-wide text-center sm:text-left'>Lorem ipsum dolor </p>
+        <div className="h-64 md:h-[500px] py-2">
+            <Carousel slide={false}>
+                <div className='cursor-pointer' onClick={handleClick}>
+                    <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPlFNo9kRsqSoHraLZP32r0IozYEP4alY8VZwTtuiG3eQgt9EtNehhM9RUF78JFAA9gvQa2scrd93D5LybkcQahPVMl6Y_NM-7RMdBbYzzCSMsXIuyaaLQ8md9T6wRYyFbVfKY_bcGCNf75plFWvh3SpMZEeCCxVoYYwvay51wQM5WpKvfQ3Yw9Nwl/s1976/e2d303b8-35eb-445c-a1dc-6bcf113dfd41.jpg"
+                    />
+                </div>
 
-                <Link className='py-8' to='../product-list'>
-                    <a className='bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-4 px-8 text-gray-100 uppercase my-5 sm:self-start text-center sm:text-left'>Shop Now</a>
-                </Link>
-            </div>
-
-            <div className='sm:w-3/5'>
-                <img src="https://raw.githubusercontent.com/itzpradip/tailwind-eshop-static-html/bc1b37d73730b9e7804e91438246ce2f996cc435/images/hero-img.svg" className='w-full' />
-            </div>
+                    <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKF3EHtLjPdoJjsAIw3YOLI1Ii8B7cZ3pjsHzJx7uJxhvb77wagU7ewRq-uYFmTyEne48kxKHGEAJPHYWcWKukfnEYcl06n8DxkhAgQa4HkLcyeoz_1AmYV7LlEGG11pgvAMur6aj0_aIc6l_kLw7F3xbG4sKJMbqXRz8CuZ8IvnC6L_2FsCNfpOlk/s1976/c6cc47c5-616a-49a5-9fb4-938b29292015.jpg"
+                    />
+               
+            </Carousel>
         </div>
+
     )
 }
 
