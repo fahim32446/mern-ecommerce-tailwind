@@ -4,7 +4,7 @@ import { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } from ".
 const router = express.Router();
 
 
-router.post('/',verifyTokenAndAdmin, CreateProduct);
+router.post('/', CreateProduct);
 router.put('/:id',verifyTokenAndAdmin, UpdateProduct);
 router.delete('/:id',verifyTokenAndAdmin, DeleteProduct);
 router.get('/find/:id', GetProduct);

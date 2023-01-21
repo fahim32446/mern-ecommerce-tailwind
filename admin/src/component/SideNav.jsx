@@ -14,7 +14,7 @@ const SideNav = () => {
             <div className="space-y-2 w-full ">
                 {navLinks.map((link, index) => (
 
-                    <div key={index} className='flex cursor-pointer group hover:border-gray-900 border-l-4 border-transparent'>
+                    <div key={index} className='flex cursor-pointer group hover:border-gray-900 border-l-4'>
 
                         <NavLink
                             to={link.url}

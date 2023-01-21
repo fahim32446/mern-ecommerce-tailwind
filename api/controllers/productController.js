@@ -43,7 +43,6 @@ export const DeleteProduct = async (req, res) => {
 
 
 
-
 export const GetProduct = async (req, res) => {
 
     try {
@@ -68,7 +67,6 @@ export const GetProducts = async (req, res) => {
     const sizeFilter = req.query.filter;
     const search = req.query.search;
 
-
     try {
         let products;
 
@@ -79,7 +77,6 @@ export const GetProducts = async (req, res) => {
         }
 
         else if (search) {
-            console.log('Runn..................');
             products = await Product.find( { $text: { $search: search } } )
         }
 

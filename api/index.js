@@ -8,6 +8,7 @@ import productRoute from './routes/ProductRoute.js';
 import orderRoute from './routes/OrderRoute.js';
 import authRoute from './routes/AuthRoute.js';
 import userRoute from './routes/UserRoute.js'
+import Categories from './routes/CategoriesRoute.js';
 import stripeRoute from './controllers/stripe.js'
 import countController from './controllers/countController.js'
 
@@ -30,6 +31,7 @@ app.use('/api/v1/product', productRoute);
 app.use('/api/v1/order', orderRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/user', userRoute);
+app.use('/api/v1/category', Categories);
 app.use("/api/checkout", stripeRoute);
 app.use("/api/count", countController);
 
