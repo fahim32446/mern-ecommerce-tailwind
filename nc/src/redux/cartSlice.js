@@ -13,7 +13,7 @@ export const cartSlice = createSlice({
     reducers: {
         showCart: (state) => state,
         addCart: (state, action) => {
-            const itemInCart = state.cart.find((item) => item.id == action.payload.id);
+            const itemInCart = state.cart.find((item) => item._id == action.payload._id);
             if (itemInCart) {
                 state.total += action.payload.price * action.payload.quantity;
                 itemInCart.quantity++;

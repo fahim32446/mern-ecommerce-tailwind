@@ -19,7 +19,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="absolute right-10 bg-white space-y-5  text-gray-600 z-30 p-3 shadow-2xl">
+    <div className="absolute right-10 bg-white space-y-5  text-gray-600 z-30 p-3 shadow-2xl duration-300 ease-in-out transition-all">
       <h1 className="w-[400px] p-1 text-xl font-semibold">
         Product in your cart
       </h1>
@@ -30,19 +30,17 @@ const Cart = () => {
           <div className="w-24 h-24 ">
             <img
               className="w-full h-full object-cover"
-              src={item.img[0]}
+              src={item.image[0]}
               alt="Product Image"
               srcset=""
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <h1 className=" font-semibold">Shirt For Men</h1>
-            <p className="">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            </p>
-
+          <div className="flex flex-col">
+            <h1 className=" font-semibold">{item.title.substring(0, 40)+"..."}</h1>
+            <p className="">{item.size}</p>
+            <p className="">{item.color}</p>
             <p className="text-blue-500">
-              {item.quantity} * ${item.price}
+              {item.quantity} * ${item.price} = {item.quantity * item.price}
             </p>
           </div>
           <DeleteOutlinedIcon onClick={()=>handleRemove(item)} className="text-red-500 m-1 cursor-pointer" />

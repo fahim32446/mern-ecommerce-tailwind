@@ -61,7 +61,7 @@ export const GetProduct = async (req, res) => {
 
 
 export const GetProducts = async (req, res) => {
-
+    
     const priceFilter = req.query.price;
     const qCategory = req.query.category;
     const sizeFilter = req.query.filter;
@@ -91,7 +91,7 @@ export const GetProducts = async (req, res) => {
         else if (qCategory) {
             products = await Product.find({
                 category: {
-                    $in: [qCategory]
+                    $regex: new RegExp(qCategory, 'i')
                 }
             });
 
