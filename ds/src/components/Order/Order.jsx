@@ -1,12 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import { getOrders } from "../../redux/orderSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const Order = ({ orders }) => {
 
+const Order = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isLoading, orders, error } = useSelector(
+    (state) => state.orderReducer
+  );
 
-  const OrderDetails = ()=>{
-    navigate('../orders/order-details')
+  useEffect(() => {
+    dispatch(getOrders());
+  }, [dispatch]);
+
+  const OrderDetails = (id)=>{
+    navigate(`../orders/order-details/${id}`)
   }
 
 
@@ -25,8 +35,8 @@ const Order = ({ orders }) => {
           </tr>
         </thead>
         <tbody>
-          {orders.map((item, index) => (
-            <tr onClick={OrderDetails} key={index} className="hover:bg-blue-200 rounded-sm duration-150 transition-colors">
+          {Array.isArray(orders) &&  orders?.slice(0, 5).map((item, index) => (
+            <tr onClick={()=>OrderDetails(item._id)} key={index} className="hover:bg-blue-200 rounded-sm duration-150 transition-colors">
               <td>{item._id}</td>
               <td>{item.name}</td>
               <td>{item.email}</td>

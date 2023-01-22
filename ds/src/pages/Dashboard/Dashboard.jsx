@@ -4,11 +4,12 @@ import order from "../../assets/order.png";
 import product from "../../assets/product.png";
 import Chart from "react-apexcharts";
 import Order from "../../components/Order/Order";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   return (
     <div className="my-14">
-
       {/* Top Section */}
       <div className="flex flex-col lg:flex-row gap-2 justify-between mt-6">
         <div className="flex gap-5 items-center pl-5 lg:w-[30%] py-4 bg-white rounded">
@@ -164,7 +165,16 @@ const Dashboard = () => {
 
       {/* Latest Order */}
       <div className="hidden lg:block mt-5 bg-white p-2 rounded">
-        <h1 className="text-xl font-semibold">Latest Order</h1>
+        <div className="flex justify-between my-3 px-2">
+          <h1 className="text-md font-semibold">Latest Order</h1>
+          <h1
+            onClick={(e) => navigate("../order")}
+            className="text-md font-semibold cursor-pointer text-blue-600"
+          >
+            View All Orders
+          </h1>
+        </div>
+
         <Order />
       </div>
     </div>

@@ -1,0 +1,7 @@
+.card img{
+    transition: opacity 0.5s ease-in-out;
+}
+
+.card img.firstImg:hover{
+    opacity: 0;
+}

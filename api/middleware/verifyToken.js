@@ -3,8 +3,6 @@ import jwt from "jsonwebtoken";
 export const verifyToken = async (req, res, next) => {
   const authHeader = req.headers.token;
   const token = authHeader.split(" ")[1];
-
-
   if (authHeader) {
     const token = authHeader.split(" ")[1];
 

@@ -53,10 +53,9 @@ export const getUser = async (req, res) => {
 
 export const getUsers = async (req, res) => {
     try {
-
         const user = await User.find();
         const { password, ...others } = user;
-        res.status(200).json(others);
+        res.status(200).json(Object.values(others));
     } catch (err) {
         res.status(500).json(err);
     }
