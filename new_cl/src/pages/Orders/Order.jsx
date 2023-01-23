@@ -12,7 +12,7 @@ const Order = () => {
 
   return (
     <div className="container mx-auto max-w-7xl p-2 md:p-0 mb-5">
-      <div className="grid grid-cols-4 gap-10">
+      <div className="grid xl:grid-cols-4 gap-10">
         <div className="border p-2 bg-white shadow rounded">
           <h1 className="text-2xl font-bold text-gray-600">Hello,</h1>
           <h1 className="text-md  text-gray-600 mt-2">{user?.name}</h1>

@@ -73,7 +73,7 @@ const Payment = () => {
     });
 
   return (
-    <div className="container flex mx-auto max-w-7xl p-2 md:p-0">
+    <div className="container flex flex-col xl:flex-row mx-auto max-w-7xl p-2 md:p-0">
       <div className="lg:w-[75%] mt-9">
         <div className="text-center text-xl font-semibold">Your Cart List</div>
         { cart.map((item, index) => (

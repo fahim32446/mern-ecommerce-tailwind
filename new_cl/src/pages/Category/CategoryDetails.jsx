@@ -15,7 +15,7 @@ const CategoryDetails = () => {
 
   return (
     <div className="container mx-auto max-w-7xl p-2 md:p-0 mb-5">
-      <div className="flex gap-3">
+      <div className="flex flex-col-reverse xl:flex-row gap-3">
         <Sidebar />
 
         {loading ? (

@@ -5,14 +5,17 @@ import Cart from "../Cart/Cart";
 import { URL } from "../../const/url";
 import useFetch from "../../hooks/useFetch";
 import { useSelector } from "react-redux";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
   const { data, loading, error, reFetch } = useFetch(`${URL}/category`);
   const { user } = useSelector((state) => state.userSlice);
+  const [showSidebar, setShowSidebar] = useState(false);
   const [open, setOpen] = useState(false);
   const { cart, cart_quantity, total } = useSelector(
     (state) => state.cartSlice
   );
+  console.log(showSidebar);
 
   return (
     <div className="bg-blue-100">
@@ -66,6 +69,10 @@ const Navbar = () => {
           </div>
         </div>
         {open && <Cart />}
+        <MobileNav
+                  showSidebar={showSidebar}
+                  setShowSidebar={setShowSidebar}
+                />
       </div>
     </div>
   );
