@@ -32,6 +32,7 @@ const Navbar = () => {
                   {item.title}
                 </Link>
               ))}
+              {!data.length && <span className="text-red-500">No Internet Available</span> }
           </div>
           <div className="font-semibold text-lg">AZ-STORE</div>
           <div className="flex gap-3">
