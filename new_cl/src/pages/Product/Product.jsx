@@ -58,7 +58,7 @@ const Product = () => {
             {/* Large Main Image */}
             <div>
               <img
-                className="h-[550px] w-[500px] object-cover"
+                className="h-[450px] w-[450px] object-cover"
                 src={
                   Array.isArray(data.image)
                     ? data?.image[selectedImg]

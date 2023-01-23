@@ -2,6 +2,7 @@ import React from "react";
 import "./Card.css";
 import { Link } from "react-router-dom";
 
+
 const Card = ({ item }) => {
   return (
     <div className="bg-white shadow border rounded-md overflow-hidden">

@@ -2,13 +2,14 @@ import React from "react";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem, removeItems } from "../../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cart, total } = useSelector(
     (state) => state.cartSlice
   );
-    console.log(cart);
 
   const handleRemove = (item) => {
     dispatch(removeItem(item))
@@ -16,6 +17,10 @@ const Cart = () => {
 
   const handleReset = () => {
     dispatch(removeItems())
+  }
+
+  const Checkout = ()=>{
+    navigate("../checkout")
   }
 
   return (
@@ -52,7 +57,7 @@ const Cart = () => {
       </div>
 
       <button
-       
+       onClick={Checkout}
         className="bg-blue-400 px-6 py-2 text-white font-semibold cursor-pointer"
       >
         PROCEED TO CHECKOUT

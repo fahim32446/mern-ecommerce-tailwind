@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login";
 import Product from "./pages/Product/Product";
 import Products from "./pages/Products/Products";
 import Signup from "./pages/Signup/Signup";
+import Payment from "./pages/Payment/Payment";
 
 const Layout = () => {
   return (
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/store/:name",
         element: <CategoryDetails />,
+      },
+      {
+        path: "checkout",
+        element: <Payment />,
       },
       {
         path: "/login",

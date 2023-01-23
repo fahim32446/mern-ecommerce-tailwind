@@ -4,24 +4,18 @@ import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { removeItem } from "../redux/cartSlice";
-import { BaseUrl } from "../assets/Const";
+import { removeItem, removeItems } from "../../redux/cartSlice";
+import { URL } from "../../const/url";
 
-const Cart = () => {
+const Payment = () => {
   const KEY =
     "pk_test_51LI2vjKpuXwUOF7kxKbz1FBezVd18SkvYqrC2bsssxgtQ0Y6V1m84warl12Xat8iwBodotO7Th1R60wtaNNrUDv800oj2OtjgO";
   const dispatch = useDispatch();
-  const { cart, cart_quantity, total } = useSelector(
-    (state) => state.cartReducer
-  );
-  const { user, email } = useSelector((state) => state.userReducer.user);
+  const { cart, total } = useSelector((state) => state.cartSlice);
+  //   const { user, email } = useSelector((state) => state.userReducer.user);
   const [stripeToken, setStripeToken] = useState(null);
   const [address, setAddress] = useState({});
   const history = useNavigate();
-
-  const onToken = (token) => {
-    setStripeToken(token);
-  };
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -43,7 +37,7 @@ const Cart = () => {
       }
     };
     stripeToken && makeRequest();
-    cart.length ? "" : history("../");
+    // cart.length ? "" : history("../");
   }, [stripeToken, total, history]);
 
   const handleRemove = (item) => {
@@ -62,24 +56,27 @@ const Cart = () => {
     });
 
   return (
-    // isLoading ? 'Loading' : (
-
-    <div className="container mx-auto lg:flex m-10">
+    <div className="container flex mx-auto max-w-7xl p-2 md:p-0">
       <div className="lg:w-[75%] mt-9">
         {cart.map((item, index) => (
           <div key={index} className="mt-1 grid grid-cols-2 gap-2">
             <div className="grid grid-cols-6 gap-1 col-span-2 bg-slate-100 m-2 rounded-lg border drop-shadow-lg">
-              <div className="w-[120px] h-[120px] mr-3 self-center p-1">
-                <img className="object-cover rounded-md" src={item?.image} />
-              </div>
 
-              <div className="w-full flex items-center col-span-2">
-                <div className="ml-16 lg:ml-0">
-                  <h2 className="font-bold text-purple-500 ">{item?.title}</h2>
-                  <div className="mt-3">
-                    <h2 className="font-semibold">{item?.color}</h2>
-                    <h2>{item?.size}</h2>
-                    <h2>${item.price.toLocaleString("en-US")}</h2>
+              <div className="p-1 flex items-center col-span-3 overflow-hidden">
+                <img className="w-[120px] h-[120px] object-cover rounded-md mr-5" src={item?.image[0]} />
+
+                <div className="">
+                  <h2 className="font-semibold text-sm text-gray-700">
+                    {item?.title}
+                  </h2>
+                  <div className="mt-1">
+                    <h2 className="text-gray-600">
+                      {item?.color || "No Color"}
+                    </h2>
+                    <h2 className="text-gray-600">{item?.size || "No Size"}</h2>
+                    <h2 className="text-gray-600">
+                      ${item.price.toLocaleString("en-US")}
+                    </h2>
                   </div>
                 </div>
               </div>
@@ -87,21 +84,21 @@ const Cart = () => {
               <div className="w-full flex items-center">
                 <div className="ml-2 flex flex-row items-center gap-2 ">
                   <div className="border rounded-lg p-2 select-none">
-                    {item.quantity}
+                    {item.quantity} Pics
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center w-full">
-                <h1 className="text-2xl font-bold italic">
-                  {(item.price * item.quantity).toLocaleString("en-US")}
+                <h1 className="text-2xl font-bold">
+                  ${(item.price * item.quantity).toLocaleString("en-US")}
                 </h1>
               </div>
 
               <div className="flex items-center justify-center w-full ">
                 <div
                   onClick={() => handleRemove(item)}
-                  className="bg-orange-400 p-2 rounded-full cursor-pointer text-xs text-gray-100 font-sans hover:bg-red-400"
+                  className="bg-orange-500 p-2 rounded-full cursor-pointer text-xs text-gray-100 font-sans hover:bg-red-400"
                 >
                   Remove
                 </div>
@@ -174,17 +171,17 @@ const Cart = () => {
               <hr />
 
               <div className="flex justify-between ml-5 mt-5 mr-5">
-                <span className="font-semibold text-xl text-purple-500">
+                <span className="font-semibold text-xl text-blue-500">
                   Total
                 </span>
-                <span className="font-semibold text-xl text-purple-500">
+                <span className="font-semibold text-xl text-blue-500">
                   ${total.toLocaleString("en-US")}
                 </span>
               </div>
               <hr />
 
-              {email ? (
-                <div className="mt-5 bg-purple-600 text-center text-white p-2 w-[150px] mx-auto rounded-full drop-shadow-md cursor-pointer mb-2 font-semibold  hover:bg-green-600 hover:marker:delay-100">
+              {/* {email ? (
+                <div className="mt-5 bg-blue-600 text-center text-white p-2 w-[150px] mx-auto rounded-full drop-shadow-md cursor-pointer mb-2 font-semibold  hover:bg-green-600 hover:marker:delay-100">
                   <StripeCheckout
                     name="Lama Shop"
                     image="https://avatars.githubusercontent.com/u/1486366?v=4"
@@ -200,20 +197,18 @@ const Cart = () => {
                 </div>
               ) : (
                 <div
-                  className="mt-5 bg-purple-600 text-center text-white p-2 w-[150px] mx-auto rounded-full drop-shadow-md cursor-pointer mb-2 font-semibold  hover:bg-green-600 hover:marker:delay-100"
+                  className="mt-5 bg-blue-600 text-center text-white p-2 w-[150px] mx-auto rounded-full drop-shadow-md cursor-pointer mb-2 font-semibold  hover:bg-green-600 hover:marker:delay-100"
                   onClick={notify}
                 >
                   Checkout Now{" "}
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    // )
   );
 };
 
-export default Cart;
+export default Payment;
