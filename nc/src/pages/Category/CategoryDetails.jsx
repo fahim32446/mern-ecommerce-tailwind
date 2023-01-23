@@ -4,6 +4,7 @@ import { URL } from "../../const/url";
 import useFetch from "../../hooks/useFetch";
 import Card from "../../components/Card/Card";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import Loading from "../Loading/Loading";
 
 const CategoryDetails = () => {
   const { name } = useParams();
@@ -18,7 +19,7 @@ const CategoryDetails = () => {
         <Sidebar />
 
         {loading ? (
-          "Loading..."
+          <Loading />
         ) : (
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 gap-y-[20px]">
             {data.map((item) => (

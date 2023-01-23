@@ -30,9 +30,9 @@ const Categories = () => {
             <button className="absolute left-0 bottom-0 right-0 top-0 z-30 ">
               <Link
                 className="bg-white px-4 py-2 font-semibold hover:bg-sky-700 hover:text-white "
-                to="/products/1"
+                to={`/store/mans`}
               >
-                Men
+                Mans
               </Link>
             </button>
           </div>
@@ -47,7 +47,7 @@ const Categories = () => {
             <button className="absolute left-0 bottom-0 right-0 top-0 z-30  ">
               <Link
                 className="bg-white px-4 py-2 font-semibold hover:bg-sky-700 hover:text-white "
-                to="/products/1"
+                to="/store/women's"
               >
                 Women
               </Link>
@@ -64,7 +64,7 @@ const Categories = () => {
             <button className="absolute left-0 bottom-0 right-0 top-0 z-30 ">
               <Link
                 className="bg-white px-4 py-2 font-semibold hover:bg-sky-700 hover:text-white "
-                to="/products/1"
+                to="/store"
               >
                 ACCESSORIES
               </Link>
@@ -81,7 +81,7 @@ const Categories = () => {
             <button className="absolute left-0 bottom-0 right-0 top-0 z-30 ">
               <Link
                 className="bg-white px-4 py-2 font-semibold hover:bg-sky-700 hover:text-white "
-                to="/products/1"
+                to="/store"
               >
                 Sale
               </Link>
@@ -98,7 +98,7 @@ const Categories = () => {
             <button className="absolute left-0 bottom-0 right-0 top-0 z-30  ">
               <Link
                 className="bg-white px-4 py-2 font-semibold hover:bg-sky-700 hover:text-white "
-                to="/products/1"
+                to="/store"
               >
                 New Arrived
               </Link>

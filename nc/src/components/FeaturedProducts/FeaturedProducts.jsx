@@ -3,6 +3,7 @@ import Card from "../Card/Card";
 import useFetch from "../../hooks/useFetch";
 import { URL } from "../../const/url";
 import shuffle from "lodash/shuffle";
+import Loading from "../../pages/Loading/Loading";
 
 const FeaturedProducts = ({ type }) => {
   const { data, loading, error, reFetch } = useFetch(`${URL}/product`);
@@ -22,7 +23,7 @@ const FeaturedProducts = ({ type }) => {
       </div>
 
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 gap-y-[20px]">
-        {type === "Latest"
+        {loading? <Loading/> : type === "Latest"
           ? data
               .slice(0, 4)
               .map((item) => <Card item={item} key={item.id} />)

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import BalanceIcon from "@mui/icons-material/Balance";
 import { addCart } from "../../redux/cartSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useFetch from "../../hooks/useFetch";
 import { URL } from "../../const/url";
+import { Oval } from "react-loader-spinner";
 
 const Product = () => {
   const [selectedImg, setSelectedImg] = useState(0);
@@ -29,7 +28,13 @@ const Product = () => {
   return (
     <div className="container mx-auto max-w-7xl p-2 md:p-0 ">
       {loading ? (
-        "Loading..."
+        <Oval
+          height="80"
+          width="auto"
+          radius="10"
+          color="blue"
+          secondaryColor="white"
+        />
       ) : (
         <div className="flex flex-col xl:flex-row gap-3">
           <div className="flex flex-col-reverse xl:flex-row gap-3 flex-1">
@@ -63,7 +68,7 @@ const Product = () => {
               />
             </div>
           </div>
-          
+
           {/* Product Description */}
           <div className="flex-1 space-y-7">
             <h1 className="font-bold text-xl">{data.title}</h1>
