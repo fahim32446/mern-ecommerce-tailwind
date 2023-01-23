@@ -50,8 +50,6 @@ const Payment = () => {
   };
 
   const Order =()=>{
-    console.log("HIIIII");
-  
     cart.length && history("../success", {
       state: {
         // stripeData: res.data,
