@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import Axios from 'axios'
-import { BaseUrl } from '../assets/Const';
+import {URL} from "../const/url"
 
 
 export const loginUser = createAsyncThunk('user/loginUser',
-    async (login) => {
+    async ({login, navigate}) => {
         try {
-            const res = await Axios.post(`${BaseUrl}/api/v1/auth/login`, login);
+            const res = await Axios.post(`${URL}/auth/login`, login);
             res.data.accessToken && localStorage.setItem("user", JSON.stringify(res.data.accessToken));
+            navigate('../')
             return res.data;
         } catch (error) {
             return error.request.response
@@ -18,10 +19,12 @@ export const loginUser = createAsyncThunk('user/loginUser',
 
 
 export const regUser = createAsyncThunk('user/regUser',
-    async (info) => {
+    async ({info, navigate}) => {
+        console.log(info);
         try {
-            const res = await Axios.post(`${BaseUrl}/api/v1/auth/register`, info);
-            console.log(res.data);
+            const res = await Axios.post(`${URL}/auth/register`, info);
+            res.data.accessToken && localStorage.setItem("user", JSON.stringify(res.data.accessToken));
+            navigate('../')
             return res.data;
         } catch (error) {
             return error.request.response
@@ -37,6 +40,7 @@ const userSlice = createSlice({
     initialState: {
         isLoading: false,
         user: [],
+        message: null,
         error: null,
     },
     
@@ -55,6 +59,7 @@ const userSlice = createSlice({
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.isLoading = true;
             state.user = action.payload;
+            state.message = !action.payload.accessToken && action.payload;
             state.error = null;
             state.isLoading = false;
         });

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
 import Cart from "../Cart/Cart";
-import { useSelector } from "react-redux";
 import { URL } from "../../const/url";
 import useFetch from "../../hooks/useFetch";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { data, loading, error, reFetch } = useFetch(`${URL}/category`);
-
+  const { user } = useSelector((state) => state.userSlice);
   const [open, setOpen] = useState(false);
   const { cart, cart_quantity, total } = useSelector(
     (state) => state.cartSlice
@@ -32,11 +32,24 @@ const Navbar = () => {
           </div>
           <div className="font-semibold text-lg">AZ-STORE</div>
           <div className="flex gap-3">
-            {["Home", "Store", "Login", "Contact"].map((item, index) => (
+            {["Home", "Store"].map((item, index) => (
               <Link to={item.toLowerCase()} className="font-semibold">
                 {item}
               </Link>
             ))}
+            {user.name ? (
+              <Link to={`../logout`} className="font-semibold">
+                Logout
+              </Link>
+            ) : (
+              <Link to={`../login`} className="font-semibold">
+                Login
+              </Link>
+            )}
+
+            <Link to={`../my-order`} className="font-semibold">
+              My Order
+            </Link>
 
             {/* <SearchIcon /> */}
             {/* <PersonOutlineOutlinedIcon />

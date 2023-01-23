@@ -2,69 +2,59 @@ import User from "../model/User.js";
 import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
 
-
-
 export const createUser = async (req, res) => {
+  try {
     const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString(),
+      name: req.body.name,
+      email: req.body.email,
+      password: CryptoJS.AES.encrypt(
+        req.body.password,
+        process.env.PASS_SEC
+      ).toString(),
     });
-
     const existingUser = await User.findOne({ email: req.body.email });
-
-    if (existingUser) return res.status(400).json( "User already exist" )
-
+    if (existingUser) return res.status(400).json("User already exist");
     const savedUser = await newUser.save();
-
     const accessToken = jwt.sign(
-        {
-            id: savedUser._id,
-            isAdmin: savedUser.isAdmin,
-        },
-        process.env.JWT_SEC,
-        { expiresIn: "1h" }
+      {
+        id: savedUser._id,
+        isAdmin: savedUser.isAdmin,
+      },
+      process.env.JWT_SEC,
+      { expiresIn: "1h" }
     );
-
     const { password, ...others } = savedUser._doc;
-
-    res.status(201).json({ ...others, accessToken })
-
-    
-
-}
-
-
-
-
+    res.status(201).json({ ...others, accessToken });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const loginUser = async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
 
+  if (!user) return res.status(400).json("User does not exist");
 
-    const user = await User.findOne({ email: req.body.email });
+  const hashedPassword = CryptoJS.AES.decrypt(
+    user.password,
+    process.env.PASS_SEC
+  );
 
-    if (!user) return res.status(400).json("User does not exist")
+  const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-    const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
+  if (OriginalPassword !== req.body.password)
+    return res.status(401).json("Wrong password");
 
-    const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+  const accessToken = jwt.sign(
+    {
+      id: user._id,
+      isAdmin: user.isAdmin,
+    },
+    process.env.JWT_SEC,
+    { expiresIn: "1h" }
+  );
 
-    if (OriginalPassword !== req.body.password) return res.status(401).json("Wrong password");
+  const { password, ...others } = user._doc;
 
-    const accessToken = jwt.sign(
-        {
-            id: user._id,
-            isAdmin: user.isAdmin,
-        },
-        process.env.JWT_SEC,
-        { expiresIn: "1h" }
-    );
-
-    const { password, ...others } = user._doc;
-
-    res.status(201).json({ ...others, accessToken })
-
-
-
-
-}
+  res.status(201).json({ ...others, accessToken });
+};

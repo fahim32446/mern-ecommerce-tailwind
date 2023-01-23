@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import { removeItem, removeItems } from "../../redux/cartSlice";
+import { toast } from "react-toastify";
+import { removeItem } from "../../redux/cartSlice";
 import { URL } from "../../const/url";
 
 const Payment = () => {
@@ -12,37 +12,56 @@ const Payment = () => {
     "pk_test_51LI2vjKpuXwUOF7kxKbz1FBezVd18SkvYqrC2bsssxgtQ0Y6V1m84warl12Xat8iwBodotO7Th1R60wtaNNrUDv800oj2OtjgO";
   const dispatch = useDispatch();
   const { cart, total } = useSelector((state) => state.cartSlice);
-  //   const { user, email } = useSelector((state) => state.userReducer.user);
+  const {user} = useSelector((state) => state.userSlice);
   const [stripeToken, setStripeToken] = useState(null);
   const [address, setAddress] = useState({});
   const history = useNavigate();
 
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await axios.post(`${BaseUrl}/api/checkout/payment`, {
-          tokenId: stripeToken.id,
-          amount: total * 100,
-        });
-        history("../success", {
-          state: {
-            stripeData: res.data,
-            cart: cart,
-            sendTo: address,
-            total: total,
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    stripeToken && makeRequest();
-    // cart.length ? "" : history("../");
-  }, [stripeToken, total, history]);
+  // useEffect(() => {
+  //   const makeRequest = async () => {
+  //     try {
+  //       const res = await axios.post(`${URL}/checkout/payment`, {
+  //         tokenId: stripeToken.id,
+  //         amount: total * 100,
+  //       });
+  //       console.log(res.data);
+  //       history("../success", {
+  //         state: {
+  //           stripeData: res.data,
+  //           cart: cart,
+  //           sendTo: address,
+  //           total: total,
+  //         },
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   stripeToken && makeRequest();
+  //   // cart.length ? "" : history("../");
+  // }, [stripeToken, total, history]);
 
   const handleRemove = (item) => {
     dispatch(removeItem(item));
   };
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  const Order =()=>{
+    console.log("HIIIII");
+  
+    cart.length && history("../success", {
+      state: {
+        // stripeData: res.data,
+        cart: cart,
+        sendTo: address,
+        total: total,
+      },
+    });
+  }
+
 
   const notify = () =>
     toast.error("Please Login Before Checkout!", {
@@ -58,7 +77,8 @@ const Payment = () => {
   return (
     <div className="container flex mx-auto max-w-7xl p-2 md:p-0">
       <div className="lg:w-[75%] mt-9">
-        {cart.map((item, index) => (
+        <div className="text-center text-xl font-semibold">Your Cart List</div>
+        { cart.map((item, index) => (
           <div key={index} className="mt-1 grid grid-cols-2 gap-2">
             <div className="grid grid-cols-6 gap-1 col-span-2 bg-slate-100 m-2 rounded-lg border drop-shadow-lg">
 
@@ -122,7 +142,7 @@ const Payment = () => {
                 }
                 type="text"
                 id="first_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-blue-500 block w-full p-2.5"
                 placeholder="Your Name..."
                 required
               />
@@ -132,7 +152,7 @@ const Payment = () => {
                 }
                 type="number"
                 id="first_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="bg-gray-50 border text-gray-900 text-sm rounded-lg outline-blue-500 block w-full p-2.5"
                 placeholder="Your Phone Number..."
                 required
               />
@@ -142,7 +162,7 @@ const Payment = () => {
                 }
                 id="message"
                 rows="4"
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border outline-blue-500 "
                 placeholder="Your Address..."
               ></textarea>
             </div>
@@ -180,10 +200,10 @@ const Payment = () => {
               </div>
               <hr />
 
-              {/* {email ? (
-                <div className="mt-5 bg-blue-600 text-center text-white p-2 w-[150px] mx-auto rounded-full drop-shadow-md cursor-pointer mb-2 font-semibold  hover:bg-green-600 hover:marker:delay-100">
-                  <StripeCheckout
-                    name="Lama Shop"
+              {user.email ? (
+                <div onClick={Order} className="mt-5 bg-blue-600 text-center text-white p-2 w-[150px] mx-auto rounded-full drop-shadow-md cursor-pointer mb-2 font-semibold  hover:bg-green-600 hover:marker:delay-100">
+                  {/* <StripeCheckout
+                    name="Az Shop"
                     image="https://avatars.githubusercontent.com/u/1486366?v=4"
                     billingAddress
                     shippingAddress
@@ -193,7 +213,8 @@ const Payment = () => {
                     stripeKey={KEY}
                   >
                     <div>Checkout Now</div>
-                  </StripeCheckout>
+                  </StripeCheckout> */}
+                  Place Order
                 </div>
               ) : (
                 <div
@@ -202,7 +223,7 @@ const Payment = () => {
                 >
                   Checkout Now{" "}
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         </div>

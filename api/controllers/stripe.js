@@ -6,6 +6,7 @@ const stripe = Stripe('sk_test_51LI2vjKpuXwUOF7kjGTaI5FHL4x5ILdjcCCnb0R15NQ2dR3J
 const router = express.Router();
 
 router.post('/payment', (req, res) => {
+    console.log("Hii PAY");
     console.log(req.body.amount);
     stripe.charges.create({
         source: req.body.tokenId,

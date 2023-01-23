@@ -9,6 +9,12 @@ import Product from "./pages/Product/Product";
 import Products from "./pages/Products/Products";
 import Signup from "./pages/Signup/Signup";
 import Payment from "./pages/Payment/Payment";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Order from "./pages/Orders/Order";
+import Logout from "./pages/Logout/Logout";
+import Success from "./pages/Success/Success";
+
 
 const Layout = () => {
   return (
@@ -16,6 +22,7 @@ const Layout = () => {
       <Navbar />
       <Outlet />
       <Footer />
+      <ToastContainer />
     </div>
   );
 };
@@ -52,6 +59,18 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <Payment />,
+      },
+      {
+        path: "my-order",
+        element: <Order />,
+      },
+      {
+        path: "success",
+        element: <Success />,
+      },
+      {
+        path: "logout",
+        element: <Logout />,
       },
       {
         path: "/login",

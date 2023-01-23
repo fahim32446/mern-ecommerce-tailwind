@@ -41,10 +41,7 @@ const SuccessPage = () => {
     dispatch(removeItems())
   }, [])
 
-  console.log(total);
-  console.log(data);
-  console.log(cart);
-  console.log(address);
+
 
   return (
 

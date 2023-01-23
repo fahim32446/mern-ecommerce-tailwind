@@ -32,7 +32,7 @@ app.use('/api/v1/order', orderRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/category', Categories);
-app.use("/api/checkout", stripeRoute);
+app.use("/api/v1/checkout", stripeRoute);
 app.use("/api/count", countController);
 
 app.get('/', (req, res) => {
