@@ -35,12 +35,18 @@ app.use('/api/v1/category', Categories);
 app.use("/api/checkout", stripeRoute);
 app.use("/api/count", countController);
 
+app.get('/', (req, res) => {
+    res.send('App is available')
+})
+
+
 // If no routes defined
 app.use((req, res, next) => {
     req.status = 404;
     const error = new Error("Routes not found");
     next(error);
 })
+
 
 // Error handle
 
@@ -53,9 +59,6 @@ app.use((error, req, res, next) => {
 });
 
 
-app.get('/', (req, res) => {
-    res.send('App is available')
-})
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Running on ${PORT}`);
