@@ -55,10 +55,11 @@ export const GetOrder = async (req, res) => {
 
 
 export const GetOrders = async (req, res) => {
-
     const query = req.query.new;
+
     try {
         const orders = query ? await Order.find().sort({ _id: -1 }).limit(5) : await Order.find().sort({ _id: -1 });
+        
         res.status(200).json(orders);
 
     } catch (error) {

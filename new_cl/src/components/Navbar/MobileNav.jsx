@@ -37,7 +37,7 @@ const MobileNav = ({ showSidebar, setShowSidebar }) => {
       >
         <div className="flex flex-col gap-3 absolute right-5 top-20 w-[80%] text-right">
           {["Home", "Store"].map((item, index) => (
-            <Link to={item.toLowerCase()} className="font-semibold hover:bg-blue-400 duration-200">
+            <Link key={index} to={item.toLowerCase()} className="font-semibold hover:bg-blue-400 duration-200">
               {item}
               <hr className="w-full" />
             </Link>

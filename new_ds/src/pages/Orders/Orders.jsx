@@ -12,7 +12,6 @@ const Orders = () => {
     (state) => state.orderReducer
   );
 
-  console.log(orders, error);
 
   const OrderDetails = (id) => {
     navigate(`../orders/order-details/${id}`)
@@ -45,7 +44,7 @@ const Orders = () => {
             <tbody>
               {Array.isArray(orders) && orders?.map((item, index) => (
                 <tr
-                  onClick={() => OrderDetails(item._id)}
+                  onClick={() => OrderDetails(item.userId)}
                   key={index}
                   className="hover:bg-blue-200 rounded-sm duration-150 transition-colors cursor-pointer"
                 >

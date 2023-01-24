@@ -9,7 +9,7 @@ const Footer = () => {
           <h3 className="font-semibold text-lg">Categories</h3>
           <div className="flex flex-col gap-3">
             {["Man", "Women", "Children", "Accessories"].map((item, index) => (
-              <Link>{item}</Link>
+              <Link key={index}>{item}</Link>
             ))}
           </div>
         </div>
@@ -17,7 +17,7 @@ const Footer = () => {
           <h3 className="font-semibold text-lg">Link</h3>
           <div className="flex flex-col gap-3">
             {["Homepage", "About", "Contact", "Stores"].map((item, index) => (
-              <Link>{item}</Link>
+              <Link key={index}>{item}</Link>
             ))}
           </div>
         </div>

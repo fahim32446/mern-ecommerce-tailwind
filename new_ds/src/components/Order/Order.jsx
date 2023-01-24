@@ -36,7 +36,7 @@ const Order = () => {
         </thead>
         <tbody>
           {Array.isArray(orders) &&  orders?.slice(0, 5).map((item, index) => (
-            <tr onClick={()=>OrderDetails(item._id)} key={index} className="hover:bg-blue-200 rounded-sm duration-150 transition-colors">
+            <tr onClick={()=>OrderDetails(item.userId)} key={index} className="hover:bg-blue-200 rounded-sm duration-150 transition-colors">
               <td>{item._id}</td>
               <td>{item.name}</td>
               <td>{item.email}</td>

@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../Card/Card";
 import useFetch from "../../hooks/useFetch";
 import { URL } from "../../const/url";
 import Loading from "../../pages/Loading/Loading";
+import Paginate from "../Paginate/Paginate";
 
-const List = ({ search }) => {
+const List = ({ search, priceFilter, sort }) => {
+  const [page, setPage] = useState(1);
+
   const { data, loading, error, reFetch } = useFetch(
-    `${URL}/product?search=${search}`
+    `${URL}/product/?page=${page}&search=${search}&price=${sort}`
   );
+
+  const { data: totalProducts } = useFetch(`${URL}/product/totalProducts`);
+
+  const totalPages = totalProducts / 6;
+
+  const handlePrevious = () => {
+    setPage(Math.max(page - 1, 1));
+  };
+
+  const handleNext = () => {
+    setPage(Math.min(page + 1, totalPages));
+  };
+
 
   return (
     <div>
@@ -17,9 +33,11 @@ const List = ({ search }) => {
             <Loading />
           </div>
         ) : (
-          !loading && data.map((item) => <Card item={item} key={item._id} />)
+          !loading && data?.map((item) => <Card item={item} key={item._id} />)
         )}
       </div>
+
+      <Paginate handlePrevious={handlePrevious} handleNext={handleNext} totalPages={totalPages} page={page}/>
     </div>
   );
 };

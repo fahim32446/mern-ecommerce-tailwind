@@ -9,6 +9,6 @@ router.post('/', CreateOrder);
 router.put('/:id', verifyTokenAndAdmin, UpdateOrder);
 router.delete('/:id', verifyTokenAndAdmin, DeleteOrder);
 router.get('/find/:id', GetOrder);
-router.get('/', GetOrders);
+router.get('/',verifyToken, verifyTokenAndAdmin, GetOrders);
 
 export default router;

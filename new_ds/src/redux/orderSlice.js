@@ -10,7 +10,7 @@ export const getOrders = createAsyncThunk('orders/getOrders',
         try {
             const res = await Axios.get(`${baseUrl}/api/v1/order`, {
                 headers: {
-                    token: `Bearer ${TOKEN.replaceAll('"', '')}`
+                    token: `Bearer ${TOKEN?.replaceAll('"', '')}`
                 }
             });
             return res.data;
@@ -24,7 +24,7 @@ export const getOrders = createAsyncThunk('orders/getOrders',
 
 
 export const findOrder = createAsyncThunk('orders/findOrder',
-    async (id) => {
+    async ({id}) => {
 
         try {
             const res = await Axios.get(`${baseUrl}/api/v1/order/find/${id}`, {

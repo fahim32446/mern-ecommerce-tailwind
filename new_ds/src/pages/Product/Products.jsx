@@ -1,20 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "../../components/Product/Product";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../redux/ProductSlice";
-import Loading from "../../components/Loading/Loading"
+import { getTotalProducts } from "../../redux/totalProducts";
+import Loading from "../../components/Loading/Loading";
+import Paginate from "../../components/Paginate/Paginate";
 
 const Products = () => {
+  const [page, setPage] = useState(1);
   const { isLoading, products, error } = useSelector((state) => state.products);
+  const { totalProduct } = useSelector((state) => state.totalProducts);
+
   const dispatch = useDispatch();
-  console.log(products);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    dispatch(getTotalProducts());
+    dispatch(getProducts({ page }));
+  }, [page]);
 
-  const navigate = useNavigate();
+  const totalPages = totalProduct / 6;
+
+  const handlePrevious = () => {
+    setPage(Math.max(page - 1, 1));
+  };
+
+  const handleNext = () => {
+    setPage(Math.min(page + 1, totalPages));
+  };
 
   const handelClick = () => {
     navigate("./add-new-product");
@@ -32,8 +46,14 @@ const Products = () => {
         </button>
       </div>
 
-      <div className="bg-white mt-5 rounded py-10 px-2">
+      <div className="bg-white mt-5 rounded py-2 px-2 relative">
         {isLoading ? <Loading /> : <Product product={products} />}
+        <Paginate
+          handlePrevious={handlePrevious}
+          handleNext={handleNext}
+          totalPages={totalPages}
+          page={page}
+        />
       </div>
     </div>
   );

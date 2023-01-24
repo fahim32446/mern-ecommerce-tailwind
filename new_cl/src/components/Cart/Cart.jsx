@@ -37,7 +37,7 @@ const Cart = () => {
               className="w-full h-full object-cover"
               src={item.image[0]}
               alt="Product Image"
-              srcset=""
+             
             />
           </div>
           <div className="flex flex-col">

@@ -6,6 +6,7 @@ import { URL } from "../../const/url";
 import useFetch from "../../hooks/useFetch";
 import { useSelector } from "react-redux";
 import MobileNav from "./MobileNav";
+import LoginLoading from "../../pages/Login/LoginLoading";
 
 const Navbar = () => {
   const { data, loading, error, reFetch } = useFetch(`${URL}/category`);
@@ -15,7 +16,6 @@ const Navbar = () => {
   const { cart, cart_quantity, total } = useSelector(
     (state) => state.cartSlice
   );
-  console.log(showSidebar);
 
   return (
     <div className="bg-blue-100">
@@ -32,12 +32,26 @@ const Navbar = () => {
                   {item.title}
                 </Link>
               ))}
-              {!data.length && <span className="text-red-500">No Internet Available</span> }
+            {!data.length && (
+              <div>
+                <span className="text-red-500">Trying to connect API</span>
+                <p className="text-[10px] absolute text-gray-400">
+                  Used free hosting for API, <br/> Sometimes need time to connect
+                </p>
+                <div className="w-5 h-5 absolute left-[220px] top-1">
+                  <LoginLoading />
+                </div>
+              </div>
+            )}
           </div>
           <div className="font-semibold text-lg">AZ-STORE</div>
           <div className="flex gap-3">
             {["Home", "Store"].map((item, index) => (
-              <Link to={item.toLowerCase()} className="font-semibold">
+              <Link
+                key={index}
+                to={item.toLowerCase()}
+                className="font-semibold"
+              >
                 {item}
               </Link>
             ))}
@@ -70,10 +84,7 @@ const Navbar = () => {
           </div>
         </div>
         {open && <Cart />}
-        <MobileNav
-                  showSidebar={showSidebar}
-                  setShowSidebar={setShowSidebar}
-                />
+        <MobileNav showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
       </div>
     </div>
   );

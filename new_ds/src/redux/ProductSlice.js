@@ -4,8 +4,8 @@ import { baseUrl } from '../assets/Const'
 const TOKEN = localStorage.getItem('user');
 
 export const getProducts = createAsyncThunk('products/getProducts',
-    async () => {
-        const res = await Axios.get(`${baseUrl}/api/v1/product`, {
+    async ({page}) => {
+        const res = await Axios.get(`${baseUrl}/api/v1/product/?page=${page}`, {
             headers: {
                 token: `Bearer ${TOKEN.replaceAll('"', '')}`
                  

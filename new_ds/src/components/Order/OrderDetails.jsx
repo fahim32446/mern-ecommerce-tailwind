@@ -10,9 +10,11 @@ const OrderDetails = () => {
   );
   const { id } = useParams();
   const dispatch = useDispatch();
+  console.log(orders);
 
   useEffect(() => {
-    dispatch(findOrder(id));
+    dispatch(findOrder({id}));
+    window.scrollTo(0, 0)
   }, []);
 
   return (
@@ -22,20 +24,20 @@ const OrderDetails = () => {
       ) : (
         <div>
           <div className="border w-fit bg-white rounded-md px-2">
-            <span className="text-gray-400"> User Name: </span> {orders?.name}
+            <span className="text-gray-400"> User Name: </span> {orders[0]?.name}
           </div>
           <div className="border w-fit bg-white rounded-md px-2 my-1">
-            <span className="text-gray-400"> User Email: </span> {orders?.email}
+            <span className="text-gray-400"> User Email: </span> {orders[0]?.email}
           </div>
 
           <div className="border w-fit bg-white rounded-md px-2 my-1">
             <span className="text-gray-400">User ID: </span>
-            {orders?.userId}
+            {orders[0]?.userId}
           </div>
 
           <div className="border w-fit bg-white rounded-md px-2 my-1">
             Users Product:
-            {orders?.products?.map((item, index) => (
+            {orders[0]?.products?.map((item, index) => (
               <div className="border p-2 rounded shadow my-3">
                 <p>
                   <span className="text-gray-400">Product title: </span>
@@ -59,31 +61,29 @@ const OrderDetails = () => {
             ))}
             <p>
               <span className="text-gray-400">Total price: </span>$
-              {orders?.amount}
+              {orders[0]?.amount}
             </p>
             <p>
               <span className="text-gray-400">Order status: </span>
-              {orders?.status}
+              {orders[0]?.status}
             </p>
-           
-              <div className="border rounded shadow my-2">
-                <p className="text-xl text-center">Delivery Address</p>
-                <div>
+            <div className="border rounded shadow my-2">
+              <p className="text-xl text-center">Delivery Address</p>
+              <div>
                 <p>
                   <span className="text-gray-400">Name: </span>
-                  {orders.address?.name}
+                  {orders[0]?.address?.name}
                 </p>
                 <p>
                   <span className="text-gray-400">Phone: </span>
-                  {orders.address?.phone}
+                  {orders[0]?.address?.phone}
                 </p>
                 <p>
                   <span className="text-gray-400">Destination: </span>
-                  {orders.address?.destination}
+                  {orders[0]?.address?.destination}
                 </p>
-                </div>
               </div>
-       
+            </div>
           </div>
         </div>
       )}

@@ -4,6 +4,7 @@ import orderReducer from "./orderSlice";
 import userReducer from "./userSlice";
 import categoryReducer from "./categorySlice";
 import customerReducer from "./customerListSlice";
+import totalProducts from "./totalProducts";
 import storage from "redux-persist/lib/storage";
 import {
     persistStore,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
     userReducer: userReducer,
     category: categoryReducer,
     customerList: customerReducer,
+    totalProducts: totalProducts,
 });
 
 

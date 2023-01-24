@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { URL } from "../../const/url";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ search, setSearch }) => {
+const Sidebar = ({ setMaxPrice, setSearch, setSort, maxPrice }) => {
   const { data, loading, error, reFetch } = useFetch(`${URL}/category`);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(search);
   };
 
   return (
@@ -43,7 +42,7 @@ const Sidebar = ({ search, setSearch }) => {
             ))}
         </div>
 
-        <div className="flex flex-col gap-1 border rounded shadow overflow-hidden p-1">
+        {/* <div className="flex flex-col gap-1 border rounded shadow overflow-hidden p-1">
           <h3 className="font-semibold text-lg mb-2 border-b">
             Filter by price
           </h3>
@@ -52,12 +51,13 @@ const Sidebar = ({ search, setSearch }) => {
             <input
               type="range"
               min={0}
-              max={100}
+              max={1000}
               onChange={(e) => setMaxPrice(e.target.value)}
             />
-            <span>10000</span>
+            <span>1000</span>
           </div>
-        </div>
+          <span className="">{maxPrice}</span>
+        </div> */}
 
         <div className="flex flex-col gap-1 border rounded shadow overflow-hidden p-1">
           <h3 className="font-semibold text-lg mb-2 border-b">Sort by</h3>
