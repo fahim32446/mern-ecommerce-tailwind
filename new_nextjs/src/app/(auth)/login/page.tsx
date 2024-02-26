@@ -7,7 +7,7 @@ import { FormEvent, useEffect, useState } from 'react';
 
 type Props = {};
 
-const page = (props: Props) => {
+const Login = (props: Props) => {
   const search = useSearchParams();
   const CredentialsSignin = search.get('error') === 'CredentialsSignin';
 
@@ -94,4 +94,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Login;

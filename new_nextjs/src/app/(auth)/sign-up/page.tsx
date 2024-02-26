@@ -19,7 +19,7 @@ type regRes = {
   accessToken: string;
 };
 
-const page = (props: Props) => {
+const SignUp = (props: Props) => {
   const router = useRouter();
   const [info, setInfo] = useState({ email: '', password: '', name: '' });
   const [loading, setLoading] = useState(false);
@@ -130,4 +130,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default SignUp;

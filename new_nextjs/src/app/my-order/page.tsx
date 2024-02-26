@@ -27,7 +27,7 @@ interface orderProducts {
 
 type Props = {};
 
-const page = async (props: Props) => {
+const MyOrder = async (props: Props) => {
   let user = { _id: '6326d78501f591aa7bf8033b' };
   const orders: OrderList[] = await fetchData(`order/find/${user?._id}`);
 
@@ -87,4 +87,4 @@ const page = async (props: Props) => {
   );
 };
 
-export default page;
+export default MyOrder;
