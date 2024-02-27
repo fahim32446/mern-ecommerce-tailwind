@@ -1,6 +1,8 @@
 import Wrapper from '@/components/Wrapper';
 import { fetchData } from '@/lib/serverApisCall';
+import { getServerSession } from 'next-auth';
 import React from 'react';
+import { options } from '../api/auth/[...nextauth]/options';
 
 export interface OrderList {
   _id: string;
@@ -28,8 +30,12 @@ interface orderProducts {
 type Props = {};
 
 const MyOrder = async (props: Props) => {
+  const session = await getServerSession(options);
+
   let user = { _id: '6326d78501f591aa7bf8033b' };
-  const orders: OrderList[] = await fetchData(`order/find/${user?._id}`);
+  const orders: OrderList[] = await fetchData(
+    `order/find/${session?.user._id}`
+  );
 
   return (
     <Wrapper>

@@ -11,12 +11,12 @@ type Props = {
 
 const ProductOption = ({ item }: Props) => {
   const [quantity, setQuantity] = useState(1);
-  const [co, setColor] = useState('');
-  const [si, setSize] = useState('');
+  const [co, setColor] = useState<any>('');
+  const [si, setSize] = useState<any>('');
   const dispatch = useDispatch();
 
   const setToCart = () => {
-    dispatch(addToCart(item));
+    dispatch(addToCart({ ...item, size: si, color: co }));
   };
 
   return (
@@ -38,7 +38,7 @@ const ProductOption = ({ item }: Props) => {
       </div>
       <div className='flex flex-col'>
         <div className='flex gap-5'>
-          {item.size.length && (
+          {item.size.length ? (
             <select
               onChange={(e) => {
                 setSize(e.target.value);
@@ -50,6 +50,8 @@ const ProductOption = ({ item }: Props) => {
                 <option key={i}>{s.toUpperCase()}</option>
               ))}
             </select>
+          ) : (
+            ''
           )}
 
           <select

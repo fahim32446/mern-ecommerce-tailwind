@@ -1,15 +1,17 @@
 'use client';
 
 import Wrapper from '@/components/Wrapper';
+import { BASE_URL } from '@/lib/request';
 import { blurDataUrl } from '@/lib/utils';
 import { useAppDispatch, useAppSelector } from '@/redux/customeReduxHook';
-import { removeFromCart } from '@/redux/slice/cartSlice';
+import { clearCart, removeFromCart } from '@/redux/slice/cartSlice';
+import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import { ProductListType } from '../(home)/_components/HomePageDataType';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { ProductListType } from '../(home)/_components/HomePageDataType';
 
 type Props = {};
 
@@ -31,6 +33,32 @@ const CheckOut = (props: Props) => {
 
   const session = useSession();
   const isAuthenticated = session.status === 'authenticated';
+
+  const user = session.data?.user;
+
+  const Order = async () => {
+    try {
+      const res = await axios.post(`${BASE_URL}/order`, {
+        name: user?.name,
+        email: user?.email,
+        userId: user?._id,
+        products: cartItems.map((item) => ({
+          image: item.image[0],
+          title: item.title,
+          productId: item._id,
+          color: item.color,
+          size: item.size,
+          quantity: item.count,
+        })),
+        amount: totalPrice,
+        address: address,
+      });
+      toast.success('Order created');
+      dispatch(clearCart());
+    } catch (error) {
+      toast.error('Something is happened wrong');
+    }
+  };
 
   return (
     <Wrapper>
@@ -171,7 +199,7 @@ const CheckOut = (props: Props) => {
 
                 {isAuthenticated ? (
                   <div
-                    // onClick={Order}
+                    onClick={Order}
                     className='mt-5 bg-blue-600 text-center text-white p-2  mx-auto rounded-full drop-shadow-md cursor-pointer mb-2 font-semibold  hover:bg-green-600 hover:marker:delay-100'
                   >
                     Place Order

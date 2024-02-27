@@ -23,6 +23,7 @@ const Navbar = (props: Props) => {
   );
 
   const session = useSession();
+
   const isAuthenticated = session.status === 'authenticated';
 
   return (
@@ -95,7 +96,7 @@ const Navbar = (props: Props) => {
                     onClick={() => setOpen(!open)}
                   >
                     <ShoppingCart />
-                    <span className='font-semibold absolute left-6 bottom-3 bg-blue-500 text-white rounded-full w-6 h-6 text-center'>
+                    <span className='font-semibold absolute border border-red-400 left-6 bottom-3 bg-blue-500 text-white rounded-full w-6 h-6 text-center z-50'>
                       {cartItemLength}
                     </span>
                   </div>

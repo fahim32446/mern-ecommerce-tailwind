@@ -1,83 +1,108 @@
-import { Children } from "react";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Footer from "./components/Footer/Footer";
-import Navbar from "./components/Navbar/Navbar";
-import CategoryDetails from "./pages/Category/CategoryDetails";
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Product from "./pages/Product/Product";
-import Products from "./pages/Products/Products";
-import Signup from "./pages/Signup/Signup";
-import Payment from "./pages/Payment/Payment";
-import { ToastContainer, toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import Order from "./pages/Orders/Order";
-import Logout from "./pages/Logout/Logout";
-import Success from "./pages/Success/Success";
-
+import CategoryDetails from './pages/Category/CategoryDetails';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
+import Logout from './pages/Logout/Logout';
+import Order from './pages/Orders/Order';
+import Payment from './pages/Payment/Payment';
+import Product from './pages/Product/Product';
+import Products from './pages/Products/Products';
+import Signup from './pages/Signup/Signup';
+import Success from './pages/Success/Success';
 
 const Layout = () => {
+  const [countdown, setCountdown] = useState(5);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      window.location.href = 'https://mern-ecommerce-tailwind.vercel.app/';
+    }, countdown * 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [countdown]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    <div className="">
-      <Navbar />
-      <Outlet />
-      <Footer />
-      <ToastContainer />
+    <div className='fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50'>
+      <div className='bg-white p-8 rounded-md text-center'>
+        <p>This site has been moved and built with Next.js.</p>
+        <p>Redirecting in {countdown} seconds...</p>
+      </div>
     </div>
   );
 };
 
+// const Layout = () => {
+//   return (
+//     <div className="">
+//       <Navbar />
+//       <Outlet />
+//       <Footer />
+//       <ToastContainer />
+//     </div>
+//   );
+// };
+
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "/home",
+        path: '/home',
         element: <Home />,
       },
       {
-        path: "/store",
+        path: '/store',
         element: <Products />,
       },
       {
-        path: "/products/:id",
+        path: '/products/:id',
         element: <Products />,
       },
       {
-        path: "/product/:id",
+        path: '/product/:id',
         element: <Product />,
       },
       {
-        path: "/store/:name",
+        path: '/store/:name',
         element: <CategoryDetails />,
       },
       {
-        path: "checkout",
+        path: 'checkout',
         element: <Payment />,
       },
       {
-        path: "my-order",
+        path: 'my-order',
         element: <Order />,
       },
       {
-        path: "success",
+        path: 'success',
         element: <Success />,
       },
       {
-        path: "logout",
+        path: 'logout',
         element: <Logout />,
       },
       {
-        path: "/login",
+        path: '/login',
         element: <Login />,
       },
       {
-        path: "/sign-up",
+        path: '/sign-up',
         element: <Signup />,
       },
     ],

@@ -1,6 +1,7 @@
 import { BASE_URL } from '@/lib/request';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -35,9 +36,14 @@ export const options: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' },
+
   callbacks: {
-    async signIn() {
+    async signIn({ user, account, profile }) {
       return true;
+    },
+
+    async jwt({ token, user, account, trigger, session }) {
+      return { ...token, ...user };
     },
 
     async session({ session, token, user }) {
